@@ -32,4 +32,9 @@ def get_dependencies(pom_file):
 
   return dependencies
 
-# Example usage (same as before)
+# Example usage:
+pom_file_path = "pom.xml"  # Replace with the actual pom.xml file path
+dependencies = get_dependencies(pom_file_path)
+
+for groupId, artifactId, version in dependencies:
+  print(f"GroupId: {groupId}, ArtifactId: {artifactId}, Version: {version}")
