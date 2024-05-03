@@ -32,7 +32,9 @@ def get_dependencies(pom_file):
     tree = ET.parse(pom_file)
     root = tree.getroot()
 
-    xmlns = '{http://maven.apache.org/POM/4.0.0}'
+    #xmlns = '{http://maven.apache.org/POM/4.0.0}'
+    xmlns = re.compile("project$").sub("", root.tag)
+    
     # Get properties
     properties = {prop.tag.replace(xmlns, ""): prop.text for prop in root.find(xmlns + 'properties')}
 
