@@ -119,6 +119,7 @@ def get_spark_type(data_type):
         "varchar": StringType(),
         "date": DateType(),
         "decimal": DecimalType(10, 2),
+        "boolean": BooleanType()
         # Add more data type mappings as needed
     }
     data_type_string = data_type.lower().split('(')[0]
@@ -181,6 +182,8 @@ def generate_random_value(data_type, range=None, string_values=None):
             return Decimal(random.randint(range[0], range[1]))
         else:
             return Decimal(random.randint(0, 1000))
+    elif data_type.lower() == "boolean":  # Handle boolean type
+        return random.choice([True, False])
     else:
         return ''.join(random.choices(string.ascii_uppercase + string.ascii_lowercase + string.digits, k=10))
 
