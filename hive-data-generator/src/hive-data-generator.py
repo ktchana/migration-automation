@@ -47,8 +47,10 @@ def generate_random_data(spark, table_names, num_records=10, ranges={}, foreign_
         schema_dict = {row['col_name']: row['data_type'] for row in schema}
 
         # Create StructType from schema
+        # Remove fields such as "# Partitioning Information" and "# col_name"
         struct_fields = [StructField(name, get_spark_type(data_type), True) 
-                         for name, data_type in schema_dict.items()]
+                         for name, data_type in schema_dict.items() if not name.startswith("# ")]
+        
         schema = StructType(struct_fields)
 
         if table_name not in table_data:
